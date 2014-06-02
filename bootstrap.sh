@@ -3,6 +3,7 @@
 # Update
 # --------------------
 apt-get update
+apt-get upgrade
 
 # Install Apache & PHP
 # --------------------
