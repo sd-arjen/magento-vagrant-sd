@@ -9,7 +9,7 @@ apt-get update
 apt-get install -y apache2
 apt-get install -y php5
 apt-get install -y libapache2-mod-php5
-apt-get install -y php5-mysql php5-curl php5-gd php5-intl php-pear php5-imap php5-mcrypt php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl php-apc
+apt-get install -y php5-mysql php5-curl php5-gd php5-intl php-pear php5-imap php5-mcrypt php5-ming php5-ps php5-pspell php5-recode php5-snmp php5-sqlite php5-tidy php5-xmlrpc php5-xsl
 
 # Delete default apache web dir and symlink mounted vagrant dir from host machine
 # --------------------
@@ -21,11 +21,23 @@ ln -fs /vagrant/httpdocs /var/www
 # --------------------
 VHOST=$(cat <<EOF
 <VirtualHost *:80>
-  DocumentRoot "/var/www"
-  ServerName localhost
-  <Directory "/var/www">
-    AllowOverride All
-  </Directory>
+    ServerAdmin webmaster@localhost
+    DocumentRoot /var/www
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+
+    <Directory />
+          Options FollowSymLinks
+          AllowOverride All
+    </Directory>
+
+    <Directory /var/www/>
+          Options Indexes FollowSymLinks MultiViews
+          AllowOverride All
+          Order allow,deny
+          allow from all
+    </Directory>
 </VirtualHost>
 EOF
 )
