@@ -84,8 +84,8 @@ if [ ! -f "/vagrant/httpdocs/app/etc/local.xml" ]; then
   --url "http://127.0.0.1:8080/" --use_rewrites yes \
   --use_secure no --secure_base_url "http://127.0.0.1:8080/" --use_secure_admin no \
   --skip_url_validation yes \
-  --admin_lastname Owner --admin_firstname Store --admin_email "admin@example.com" \
-  --admin_username admin --admin_password password123123
+  --admin_lastname Owner --admin_firstname Store --admin_email "$3" \
+  --admin_username "$1" --admin_password $2
 fi
 
 cd /vagrant/httpdocs

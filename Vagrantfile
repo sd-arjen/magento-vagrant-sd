@@ -13,7 +13,13 @@ Vagrant.configure("2") do |config|
   # doesn't already exist on the user's system.
   config.vm.box_url = "http://cloud-images.ubuntu.com/vagrant/trusty/current/trusty-server-cloudimg-amd64-vagrant-disk1.box"
   
-  config.vm.provision :shell, :path => "bootstrap.sh"
+  file = File.open("config.txt", "rb")
+  contents = file.read
+  
+  config.vm.provision "shell" do |s|
+    s.path = "bootstrap.sh"
+    s.args = contents.split("\n")
+  end
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
