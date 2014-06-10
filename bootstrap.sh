@@ -47,6 +47,8 @@ EOF
 echo "$VHOST" > /etc/apache2/sites-enabled/000-default
 
 a2enmod rewrite
+ln -s /etc/php5/conf.d/mcrypt.ini /etc/php5/mods-available
+php5enmod mcrypt
 service apache2 restart
 
 # Mysql
