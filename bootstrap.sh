@@ -23,6 +23,7 @@ ln -fs /vagrant/httpdocs /var/www
 VHOST=$(cat <<EOF
 <VirtualHost *:80>
     ServerAdmin webmaster@localhost
+    
     DocumentRoot /var/www
 
     ErrorLog ${APACHE_LOG_DIR}/error.log
@@ -79,7 +80,7 @@ fi
 if [ ! -f "/vagrant/httpdocs/app/etc/local.xml" ]; then
   cd /vagrant/httpdocs
   sudo /usr/bin/php -f install.php -- --license_agreement_accepted yes \
-  --locale en_US --timezone "America/Los_Angeles" --default_currency USD \
+  --locale nl_NL --timezone "Europe/Amsterdam" --default_currency EUR \
   --db_host localhost --db_name magentodb --db_user magentouser --db_pass password \
   --url "http://127.0.0.1:8080/" --use_rewrites yes \
   --use_secure no --secure_base_url "http://127.0.0.1:8080/" --use_secure_admin no \
